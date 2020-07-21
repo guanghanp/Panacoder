@@ -7,9 +7,15 @@ from django.http import HttpResponse
 from .forms import ArticlePostForm
 # 引入User模型
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 def article_list(request):
-    articles = ArticlePost.objects.all()
+    article_list = ArticlePost.objects.all()
+
+    paginator = Paginator(article_list,2)
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+
     context = {'articles':articles}
     return render(request,'article/list.html', context)
 

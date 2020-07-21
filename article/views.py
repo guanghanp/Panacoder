@@ -8,26 +8,41 @@ from .forms import ArticlePostForm
 # 引入User模型
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 def article_list(request):
-    article_list = ArticlePost.objects.all()
+    
+    if request.GET.get('order') == 'total_views':
+        article_list = ArticlePost.objects.all().order_by('-total_views')
+        order = 'total_views'
+    else:
+        article_list = ArticlePost.objects.all()
+        order = 'time'
 
     paginator = Paginator(article_list,2)
     page = request.GET.get('page')
     articles = paginator.get_page(page)
 
-    context = {'articles':articles}
+    context = {'articles':articles, 'order':order}
     return render(request,'article/list.html', context)
 
 
 def article_detail(request, id):
     article = ArticlePost.objects.get(id=id)
-    article.body = markdown.markdown(article.body,
-    extensions=[
-    'markdown.extensions.extra',
-    'markdown.extensions.codehilite',
-    ])
-    context = { 'article': article }
+
+    article.total_views += 1
+    article.save(update_fields=['total_views'])
+
+    md = markdown.Markdown(
+        extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc',
+        ]
+    )
+    article.body = md.convert(article.body)
+
+    context = { 'article': article, 'toc': md.toc}
     return render(request, 'article/detail.html', context)
 
 
@@ -60,7 +75,10 @@ def article_create(request):
         # 返回模板
         return render(request, 'article/create.html', context)
 
+@login_required(login_url='/userprofile/login/')
 def article_delete(request, id):
     article = ArticlePost.objects.get(id=id)
+    if request.user != article.author:
+        return HttpResponse("Sorry, you have no rights to delete this article.")
     article.delete()
     return redirect("article:article_list")

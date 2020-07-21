@@ -14,14 +14,32 @@
 <div class="container">
     <div class="row">
         <!-- 标题及作者 -->
-        <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
-        <div class="col-12 alert alert-success">Author：{{ article.author }}
-            <a href="{% url "article:article_delete" article.id %}">Delete Article</a>
+        <div class="col-9">
+            <h1 class="mt-4 mb-4">{{ article.title }}</h1>
+            <div class="alert alert-success">
+                <div>
+                    Author: {{ article.author }}
+                    {% if user == article.author %}
+                        <a href="{% url "article:article_delete" article.id %}">Delete Article</a>
+                    {% endif %}
+                </div>
+                <div>
+                    views: {{ article.total_views }}
+                </div>
+            </div>
+            <!-- 文章正文 -->
+            <div class="col-12">
+                <p>{{ article.body|safe }}</p>
+            </div>
+
         </div>
-        <!-- 文章正文 -->
-        <div class="col-12">
-            <p>{{ article.body|safe }}</p>
+        <div class="col-3 mt-4">
+            <hr>
+            <div>
+                {{ toc|safe }}
+            </div>
         </div>
+
     </div>
 </div>
 

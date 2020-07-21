@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.urls import reverse
 
 # Data Model for Article Post
 class ArticlePost(models.Model):
@@ -17,3 +17,6 @@ class ArticlePost(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('article:article_detail', args=[self.id])

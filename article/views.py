@@ -9,6 +9,7 @@ from .forms import ArticlePostForm
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from comment.models import Comment
 
 def article_list(request):
     
@@ -29,7 +30,9 @@ def article_list(request):
 
 def article_detail(request, id):
     article = ArticlePost.objects.get(id=id)
+    comments = Comment.objects.filter(article=id)
 
+    # increment total views for this article
     article.total_views += 1
     article.save(update_fields=['total_views'])
 
@@ -42,7 +45,7 @@ def article_detail(request, id):
     )
     article.body = md.convert(article.body)
 
-    context = { 'article': article, 'toc': md.toc}
+    context = { 'article': article, 'toc': md.toc, 'comments':comments}
     return render(request, 'article/detail.html', context)
 
 
@@ -75,7 +78,7 @@ def article_create(request):
         # 返回模板
         return render(request, 'article/create.html', context)
 
-@login_required(login_url='/userprofile/login/')
+@login_required(login_url='/user/login/')
 def article_delete(request, id):
     article = ArticlePost.objects.get(id=id)
     if request.user != article.author:

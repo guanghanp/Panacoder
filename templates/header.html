@@ -1,24 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light blog-navbar bg-light py-1">
     <div class="container">
-  
+      <a class="navbar-brand mb-0 h1" href="#"><strong class="px-2">PanaCoder</strong></a>
       <!-- 导航栏商标 -->
-      <a class="navbar-brand" href="#">My Blog</a>
-  
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
       <!-- 导航入口 -->
-      <div>
-        <ul class="navbar-nav">
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav ml-auto">
           <!-- 条目 -->
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'article:article_create' %}">New Article</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'article:article_list' %}">Home</a>
+          <li class="nav-item mr-2">
+            <a class="nav-link" href="{% url 'article:article_list' %}"><i class="fas fa-home"></i> Home</a>
           </li>
           {% if user.is_authenticated %}
             <!-- 如果用户已经登录，则显示用户名下拉框 -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown mr-2">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ user.username }}
+                  <i class="fas fa-user"></i>&nbsp;{{ user.username }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href='{% url "user:logout" %}'>Log out</a>
@@ -26,8 +25,8 @@
             </li>
           <!-- 如果用户未登录，则显示 “登录” -->
           {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'user:login' %}">Log in</a>
+            <li class="nav-item mr-2">
+                <a class="nav-link" href="{% url 'user:login' %}"><i class="fas fa-user"></i> Log in</a>
             </li>                    
             <!-- if 语句在这里结束 -->
           {% endif %}

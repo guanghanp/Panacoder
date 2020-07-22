@@ -1,0 +1,5 @@
+django==2.2
+markdown
+Pygments
+Pillow
+django-imagekit

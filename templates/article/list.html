@@ -15,44 +15,66 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
+            Sort by: &nbsp; &nbsp; 
             <li class="breadcrumb-item">
                 <a href="{% url 'article:article_list' %}">
-                    Sort by time
+                    <i class="fas fa-clock"></i>
                 </a>
             </li>
             <li class="breadcrumb-item">
                 <a href="{% url 'article:article_list' %}?order=total_views">
-                    Sort by views
+                    <i class="fas fa-eye"></i>
                 </a>
             </li>
         </ol>
     </nav>
     <div class="row mt-2">
-
         {% for article in articles %}
-        <!-- 文章内容 -->
-        <div class="col-4 mb-4">
-        <!-- 卡片容器 -->
-            <div class="card h-100">
+            <!-- 标题图 -->
+            {% if article.image %}
+                <div class="col-3">
+                    <img src="{{ article.image.url }}" 
+                        alt="image" 
+                        style="max-width:100%; border-radius: 20px"
+                    >
+                </div>
+            {% endif %}
+            <!-- 文章内容 -->
+            <div class="col">
                 <!-- 标题 -->
-                <h4 class="card-header">{{ article.title }}</h4>
+                <h4>
+                    <b>
+                        <a href="{% url 'article:article_detail' article.id %}"
+                        style="color: black;" 
+                        >
+                            {{ article.title }}
+                        </a>
+                    </b>
+                </h4>
                 <!-- 摘要 -->
-                <div class="card-body">
-                    <p class="card-text">{{ article.body|slice:'100' }}...</p>
+                <div>
+                    <p style="color: gray;">
+                        {{ article.body|slice:'100' }}...
+                    </p>
                 </div>
                 <!-- 注脚 -->
-                <div class="card-footer">
-                    <a href="{% url 'article:article_detail' article.id %}" class="btn btn-primary">阅读本文</a>
-                    <span>
-                        <small class="col align-self-end" style="color: gray;">
-                            views: {{ article.total_views }}
-                        </small>
-                    </span>                
-                </div>
+                <p style="margin-bottom: -1px;">
+                    <!-- 附加信息 -->
+                    {% if article.column %}
+                    <span style="color: rgb(98, 116, 216);">
+                        <i class="fas fa-book"></i> {{ article.column }} &nbsp;
+                    </span>
+                    {% endif %}
+                    <span style="color: gray;">
+                        <i class="fas fa-eye"></i> {{ article.total_views }} &nbsp; 
+                    </span>
+                    <span style="color: grey;">
+                        <i class="fas fa-clock"></i> {{ article.created|date:'Y-m-d' }} &nbsp;
+                    </span>
+                </p>
             </div>
-        </div>
+            <hr style="width: 100%;">
         {% endfor %}
-
     </div>
     <div class="pagination row">
         <div class="m-auto">

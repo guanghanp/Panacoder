@@ -45,8 +45,10 @@ class ArticleView(DetailView):
             ]
         )
         article.body = md.convert(article.body)
+        comments = Comment.objects.filter(article=article.id)
         context_data['article']=article
         context_data['toc'] = md.toc
+        context_data['comments'] = comments
         return context_data
 
 def article_create(request):

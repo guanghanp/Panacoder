@@ -44,8 +44,8 @@
                 <!-- 文章内容 -->
                 <div class="col">
                     <!-- Title -->
-                    <h4 class="mt-0 font-weight-bold article-title">
-                            <a href="{% url 'article:article_detail' article.id %}">
+                    <h4 class="mt-0 font-weight-bold">
+                            <a class="article-title" href="{% url 'article:article_detail' article.id %}">
                                 {{ article.title }}
                             </a>
                     </h4>
@@ -67,7 +67,7 @@
                             <i class="fas fa-eye"></i> {{ article.total_views }} &nbsp; 
                         </span>
                         <span style="color: grey;">
-                            <i class="fas fa-clock"></i> {{ article.created|date:'Y-m-d' }} &nbsp;
+                            <i class="fas fa-clock"></i> {{ article.created|timesince }} &nbsp;
                         </span>
                     </p>
                 </div>

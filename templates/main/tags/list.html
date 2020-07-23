@@ -1,0 +1,79 @@
+{% load main_tags %}
+
+
+<!-- Sort Options -->
+<div class="text-secondary row font-weight-bold pt-2 choice">
+    {% url 'main:article_list' as base_index %}
+    {% url 'main:article_list_view' as view_index %}
+    <a class="pb-2 {% if request.path == base_index %}active{% endif %}" href="{{ base_index }}">
+        <i class="fas fa-calendar-alt mr-1"></i>Sort by Time</a>
+    <a class="pb-2 ml-4 {% if request.path == view_index %}active{% endif %}" href="{{ view_index }}">
+        <i class="fas fa-fire"></i> Sort by Views</a>
+</div>
+
+<!-- Article List -->
+<div class="article-list">
+    {% for article in articles %}
+        <!-- Title picture -->
+        <div class="article-box row mb-1 mb-sm-2 p-2 p-lg-3">
+            {% if article.image %}
+                <div class="col-3">
+                    <img src="{{ article.image.url }}" 
+                        alt="image" 
+                        style="max-width:100%; border-radius: 10px"
+                    >
+                </div>
+            {% endif %}
+            <!-- Content -->
+            <div class="col">
+                <!-- Title -->
+                <h4 class="mt-0 font-weight-bold">
+                        <a class="article-title" href="{% url 'main:detail' article.id %}">
+                            {{ article.title }}
+                        </a>
+                </h4>
+                <!-- Summary -->
+                <div>
+                    <p style="color: gray;">
+                        {{ article.body|slice:'100' }}...
+                    </p>
+                </div>
+                <!-- 注脚 -->
+                <p style="margin-bottom: -1px;">
+                    <!-- 附加信息 -->
+                    {% if article.catagory %}
+                    <span style="color: #457b9d;">
+                        <i class="fas fa-book"></i> {{ article.catagory }} &nbsp;
+                    </span>
+                    {% endif %}
+                    <span style="color: gray;">
+                        <i class="fas fa-eye"></i> {{ article.total_views }} &nbsp; 
+                    </span>
+                    <span style="color: grey;">
+                        <i class="fas fa-clock"></i> {{ article.created|timesince_en }} &nbsp;
+                    </span>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% if is_paginated %}
+<div class="pagination row">
+    <div class="m-auto">
+        <div class="text-center mt-2 mt-sm-1 mt-md-0 mb-3 f-16">
+            {% if page_obj.has_previous %}
+            <a class="text-success" href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>
+            {% else %}
+            <span class="text-secondary" title="Currently at first page">&laquo; Prev</span>
+            {% endif %}
+            <span class="mx-2">Page&nbsp;{{ page_obj.number }}&nbsp;/&nbsp;{{ paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+            <a class="text-success" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+            {% else %}
+            <span class="text-secondary" title="Currently at last page">Next &raquo;</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
+

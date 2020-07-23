@@ -1,0 +1,35 @@
+
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load main_tags %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    PanaCoder
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<!-- 定义放置文章标题的div容器 -->
+<div class="container">
+
+<!-- Coolors Palette Widget -->
+<!-- <script src="https://coolors.co/palette-widget/widget.js"></script>
+<script data-id="06616810887143609">new CoolorsPaletteWidget("06616810887143609", ["000000","14213d","fca311","e5e5e5","ffffff"]); </script> -->
+<!-- Coolors Palette Widget -->
+<!-- <script src="https://coolors.co/palette-widget/widget.js"></script>
+<script data-id="024252984958563695">new CoolorsPaletteWidget("024252984958563695", ["e63946","f1faee","a8dadc","457b9d","1d3557"]); </script> -->
+
+    <div class="row">
+        <div class="col-lg-8">
+            {% load_article_list %}
+        </div>
+        <div class="col-4">
+            {% include 'main/tags/sideBar.html' %}
+        </div>
+    </div>
+        
+</div>
+{% endblock content %}

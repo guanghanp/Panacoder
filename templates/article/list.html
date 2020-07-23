@@ -13,103 +13,82 @@
 
 <!-- 定义放置文章标题的div容器 -->
 <div class="container">
-    <!-- Coolors Palette Widget -->
+
 <!-- Coolors Palette Widget -->
-<script src="https://coolors.co/palette-widget/widget.js"></script>
-<script data-id="06616810887143609">new CoolorsPaletteWidget("06616810887143609", ["000000","14213d","fca311","e5e5e5","ffffff"]); </script>
+<!-- <script src="https://coolors.co/palette-widget/widget.js"></script>
+<script data-id="06616810887143609">new CoolorsPaletteWidget("06616810887143609", ["000000","14213d","fca311","e5e5e5","ffffff"]); </script> -->
 <!-- Coolors Palette Widget -->
-<script src="https://coolors.co/palette-widget/widget.js"></script>
-<script data-id="024252984958563695">new CoolorsPaletteWidget("024252984958563695", ["e63946","f1faee","a8dadc","457b9d","1d3557"]); </script>
-    <div class="text-secondary font-weight-bold py-2 f-15 choice">
-        <a class="pb-2 active" href="{{ base_index }}">
+<!-- <script src="https://coolors.co/palette-widget/widget.js"></script>
+<script data-id="024252984958563695">new CoolorsPaletteWidget("024252984958563695", ["e63946","f1faee","a8dadc","457b9d","1d3557"]); </script> -->
+
+    <div class="text-secondary row font-weight-bold pt-2 choice">
+        {% url 'article:article_list' as base_index %}
+        {% url 'article:article_list_view' as view_index %}
+        <a class="pb-2 {% if request.path == base_index %}active{% endif %}" href="{{ base_index }}">
             <i class="fa fa-bars mr-1"></i>Sort by Time</a>
-        <a class="pb-2 ml-4 {% if request.path == hot_index %}active{% endif %}" href="{{ hot_index }}">
+        <a class="pb-2 ml-4 {% if request.path == view_index %}active{% endif %}" href="{{ view_index }}">
             <i class="fa fa-fire mr-1"></i>Sort by Views</a>
     </div>
-    <div class="row mt-2">
+    <div class="article-list">
         {% for article in articles %}
             <!-- 标题图 -->
-            {% if article.image %}
-                <div class="col-3">
-                    <img src="{{ article.image.url }}" 
-                        alt="image" 
-                        style="max-width:100%; border-radius: 20px"
-                    >
-                </div>
-            {% endif %}
-            <!-- 文章内容 -->
-            <div class="col">
-                <!-- 标题 -->
-                <h4>
-                    <b>
-                        <a href="{% url 'article:article_detail' article.id %}"
-                        style="color: black;" 
+            <div class="article-box row mb-1 mb-sm-2 p-2 p-lg-3">
+                {% if article.image %}
+                    <div class="col-3">
+                        <img src="{{ article.image.url }}" 
+                            alt="image" 
+                            style="max-width:100%; border-radius: 10px"
                         >
-                            {{ article.title }}
-                        </a>
-                    </b>
-                </h4>
-                <!-- 摘要 -->
-                <div>
-                    <p style="color: gray;">
-                        {{ article.body|slice:'100' }}...
+                    </div>
+                {% endif %}
+                <!-- 文章内容 -->
+                <div class="col">
+                    <!-- Title -->
+                    <h4 class="mt-0 font-weight-bold article-title">
+                            <a href="{% url 'article:article_detail' article.id %}">
+                                {{ article.title }}
+                            </a>
+                    </h4>
+                    <!-- 摘要 -->
+                    <div>
+                        <p style="color: gray;">
+                            {{ article.body|slice:'100' }}...
+                        </p>
+                    </div>
+                    <!-- 注脚 -->
+                    <p style="margin-bottom: -1px;">
+                        <!-- 附加信息 -->
+                        {% if article.column %}
+                        <span style="color: #457b9d;">
+                            <i class="fas fa-book"></i> {{ article.column }} &nbsp;
+                        </span>
+                        {% endif %}
+                        <span style="color: gray;">
+                            <i class="fas fa-eye"></i> {{ article.total_views }} &nbsp; 
+                        </span>
+                        <span style="color: grey;">
+                            <i class="fas fa-clock"></i> {{ article.created|date:'Y-m-d' }} &nbsp;
+                        </span>
                     </p>
                 </div>
-                <!-- 注脚 -->
-                <p style="margin-bottom: -1px;">
-                    <!-- 附加信息 -->
-                    {% if article.column %}
-                    <span style="color: #457b9d;">
-                        <i class="fas fa-book"></i> {{ article.column }} &nbsp;
-                    </span>
-                    {% endif %}
-                    <span style="color: gray;">
-                        <i class="fas fa-eye"></i> {{ article.total_views }} &nbsp; 
-                    </span>
-                    <span style="color: grey;">
-                        <i class="fas fa-clock"></i> {{ article.created|date:'Y-m-d' }} &nbsp;
-                    </span>
-                </p>
             </div>
-            <hr style="width: 100%;">
         {% endfor %}
     </div>
     <div class="pagination row">
         <div class="m-auto">
-            <span class="step-links">
-                <!-- 如果不是第一页，则显示上翻按钮 -->
-                {% if articles.has_previous %}
-                    <a href="?page=1&order={{ order }}" class="btn btn-success">
-                        &laquo; 1
-                    </a>
-                    <span>...</span>
-                    <a href="?page={{ articles.previous_page_number }}&order={{ order }}" 
-                       class="btn btn-secondary"
-                    >
-                        {{ articles.previous_page_number }}
-                    </a>
+            <div class="text-center mt-2 mt-sm-1 mt-md-0 mb-3 f-16">
+                {% if page_obj.has_previous %}
+                <a class="text-success" href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>
+                {% else %}
+                <span class="text-secondary" title="Currently at first page">&laquo; Prev</span>
                 {% endif %}
-    
-                <!-- 当前页面 -->
-                <span class="current btn btn-danger btn-lg">
-                    {{ articles.number }}
-                </span>
-    
-                <!-- 如果不是最末页，则显示下翻按钮 -->
-                {% if articles.has_next %}
-                    <a href="?page={{ articles.next_page_number }}&order={{ order }}"
-                       class="btn btn-secondary"
-                    >
-                        {{ articles.next_page_number }}
-                    </a>
-                    <span>...</span>
-                    <a href="?page={{ articles.paginator.num_pages }}&order={{ order }}"
-                       class="btn btn-success"
-                    >
-                        {{ articles.paginator.num_pages }} &raquo;
-                    </a>
+                <span class="mx-2">Page&nbsp;{{ page_obj.number }}&nbsp;/&nbsp;{{ paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                <a class="text-success" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+                {% else %}
+                <span class="text-secondary" title="Currently at last page">Next &raquo;</span>
                 {% endif %}
-            </span>
+            </div>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import ArticlePost
+from django.views.generic import  DetailView, ListView
 import markdown
 # 引入HttpResponse
 from django.http import HttpResponse
@@ -11,43 +12,42 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from comment.models import Comment
 
-def article_list(request):
-    
-    if request.GET.get('order') == 'total_views':
-        article_list = ArticlePost.objects.all().order_by('-total_views')
-        order = 'total_views'
-    else:
-        article_list = ArticlePost.objects.all()
-        order = 'time'
+class IndexView(ListView):
+    model = ArticlePost
+    context_object_name = 'articles'
+    template_name = 'article/list.html'
+    paginate_by = 2
 
-    paginator = Paginator(article_list,2)
-    page = request.GET.get('page')
-    articles = paginator.get_page(page)
+    def get_ordering(self):
+        sort = self.kwargs.get('sort')
+        if sort == 'v':
+            return ('-total_views','-id')
+        return ('-created')
 
-    context = {'articles':articles, 'order':order}
-    return render(request,'article/list.html', context)
+class ArticleView(DetailView):
+    model = ArticlePost
+    context_object_name = 'article'
+    template_name = 'article/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context_data = super(ArticleView, self).get_context_data()
+        article = context_data['article']
 
-def article_detail(request, id):
-    article = ArticlePost.objects.get(id=id)
-    comments = Comment.objects.filter(article=id)
+        # increment total views for this article
+        article.total_views += 1
+        article.save(update_fields=['total_views'])
 
-    # increment total views for this article
-    article.total_views += 1
-    article.save(update_fields=['total_views'])
-
-    md = markdown.Markdown(
-        extensions=[
-        'markdown.extensions.extra',
-        'markdown.extensions.codehilite',
-        'markdown.extensions.toc',
-        ]
-    )
-    article.body = md.convert(article.body)
-
-    context = { 'article': article, 'toc': md.toc, 'comments':comments}
-    return render(request, 'article/detail.html', context)
-
+        md = markdown.Markdown(
+            extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.toc',
+            ]
+        )
+        article.body = md.convert(article.body)
+        context_data['article']=article
+        context_data['toc'] = md.toc
+        return context_data
 
 def article_create(request):
     # 判断用户是否提交数据

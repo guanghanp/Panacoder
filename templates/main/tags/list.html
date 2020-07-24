@@ -1,8 +1,7 @@
 {% load main_tags %}
 
-
 <!-- Sort Options -->
-<div class="text-secondary row font-weight-bold pt-2 choice">
+<div class="text-secondary font-weight-bold py-2 choice">
     {% url 'main:article_list' as base_index %}
     {% url 'main:article_list_view' as view_index %}
     <a class="pb-2 {% if request.path == base_index %}active{% endif %}" href="{{ base_index }}">
@@ -12,20 +11,19 @@
 </div>
 
 <!-- Article List -->
-<div class="article-list">
+<div class="summary-list">
     {% for article in articles %}
         <!-- Title picture -->
-        <div class="article-box row mb-1 mb-sm-2 p-2 p-lg-3">
+        <div class="media mb-1 mb-sm-2 p-2 p-lg-3">
             {% if article.image %}
-                <div class="col-3">
-                    <img src="{{ article.image.url }}" 
-                        alt="image" 
-                        style="max-width:100%; border-radius: 10px"
-                    >
-                </div>
+            <div class="align-self-center mr-2 mr-lg-3 w-25 modal-open">
+                <img class="w-100" src="{{ article.image.url }}" 
+                    alt="image" 
+                >
+            </div>
             {% endif %}
             <!-- Content -->
-            <div class="col">
+            <div class="media-body">
                 <!-- Title -->
                 <h4 class="mt-0 font-weight-bold">
                         <a class="article-title" href="{% url 'main:detail' article.id %}">
@@ -41,9 +39,9 @@
                 <!-- 注脚 -->
                 <p style="margin-bottom: -1px;">
                     <!-- 附加信息 -->
-                    {% if article.catagory %}
+                    {% if article.category %}
                     <span style="color: #457b9d;">
-                        <i class="fas fa-book"></i> {{ article.catagory }} &nbsp;
+                        <i class="fas fa-book"></i> {{ article.category }} &nbsp;
                     </span>
                     {% endif %}
                     <span style="color: gray;">
@@ -62,13 +60,13 @@
     <div class="m-auto">
         <div class="text-center mt-2 mt-sm-1 mt-md-0 mb-3 f-16">
             {% if page_obj.has_previous %}
-            <a class="text-success" href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>
+            <a class="text-info" href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>
             {% else %}
             <span class="text-secondary" title="Currently at first page">&laquo; Prev</span>
             {% endif %}
             <span class="mx-2">Page&nbsp;{{ page_obj.number }}&nbsp;/&nbsp;{{ paginator.num_pages }}</span>
             {% if page_obj.has_next %}
-            <a class="text-success" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+            <a class="text-info" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
             {% else %}
             <span class="text-secondary" title="Currently at last page">Next &raquo;</span>
             {% endif %}

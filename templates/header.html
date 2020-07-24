@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg blog-navbar fixed-top bg-light py-1 px-4">
+<nav class="navbar navbar-expand-md blog-navbar fixed-top bg-light py-1 px-4">
       <a class="navbar-brand mb-0 h1" id="site-name" href="{% url 'main:article_list' %}"><strong class="px-2">PanaCoder</strong></a>
       <!-- 导航栏商标 -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,12 +28,11 @@
                   <a class="dropdown-item" href='{% url "user:logout" %}'>Log out</a>
                 </div>
             </li>
-          <!-- 如果用户未登录，则显示 “登录” -->
+          <!-- if not logged in, display log in button -->
           {% else %}
             <li class="nav-item mr-2">
                 <a class="nav-link" href="{% url 'user:login' %}"><i class="fas fa-user"></i> Log in</a>
             </li>                    
-            <!-- if 语句在这里结束 -->
           {% endif %}
         </ul>
       </div>

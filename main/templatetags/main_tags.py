@@ -1,9 +1,11 @@
+
 from django import template
+from django.utils import timezone
+from ..models import Article, Category
+from django.db.models.aggregates import Count
+import math
 
 register = template.Library()
-
-from django.utils import timezone
-import math
 
 @register.filter(name='timesince_en')
 def time_since_en(value):
@@ -41,3 +43,10 @@ def time_since_en(value):
 @register.inclusion_tag('main/tags/list.html',takes_context=True)
 def load_article_list(context):
     return context
+
+@register.simple_tag
+def get_category():
+    return Category.objects.annotate(total=Count('article')).filter(total__gt=0)
+
+
+

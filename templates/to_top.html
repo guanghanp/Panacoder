@@ -30,8 +30,18 @@
         cursor: pointer;
         position: fixed;
         right: 2rem;
-        bottom: 2rem;
+        bottom: 4rem;
         display: none;
+    }
+
+    .toTop-arrow:hover {
+        animation: up-down 1.5s infinite ease-in-out;
+    }
+
+    @keyframes up-down{
+        from {}
+        50% {transform: translateY(-20%);}
+        to {}
     }
 
     /* 绘制按钮中的向上箭头 */

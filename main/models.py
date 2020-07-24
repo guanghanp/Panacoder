@@ -6,7 +6,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 
 # Data Model for Article Post
-class Catagory(models.Model):
+class Category(models.Model):
 
     # title for catagory
     title = models.CharField(max_length=100, blank=True)
@@ -23,8 +23,8 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
     body = models.TextField()
     total_views = models.PositiveIntegerField(default=0)
-    catagory = models.ForeignKey(
-        Catagory,
+    category = models.ForeignKey(
+        Category,
         null=True,
         blank=True,
         on_delete=models.PROTECT,

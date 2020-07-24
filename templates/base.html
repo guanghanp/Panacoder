@@ -25,9 +25,9 @@
     <!-- 引入导航栏 -->
     {% include 'header.html' %}
     <!-- 预留具体页面的位置 -->
-    <div class="container" id="content">
+    <main>
         {% block content %}{% endblock content %}
-    </div>
+    </main>
     
 
     <!-- 引入注脚 -->
@@ -35,7 +35,6 @@
 
     <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
     <script src="{% static 'jquery/jquery-3.5.1.js' %}"></script>
-    <!-- <script src="{% static 'popper/popper.js' %}"></script>     -->
     <!-- 引入bootstrap的js文件 -->
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <script>

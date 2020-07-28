@@ -5,16 +5,30 @@ from django.urls import reverse
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 
-# Data Model for Article Post
+# Data Model for Category
 class Category(models.Model):
 
-    # title for catagory
-    title = models.CharField(max_length=100, blank=True)
+    # name for catagory
+    name = models.CharField(max_length=100, blank=True)
     # time of creation
     created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.title
+        return self.name
+
+# Article tag
+class Tag(models.Model):
+    name = models.CharField(max_length=20)
+
+    class Meta:
+        ordering = ['id']
+
+    def __str__(self):
+        return self.name
+
+    # return all the articles in this tag
+    def get_article_list(self):
+        return Article.objects.filter(tags=self)
 
 # Data Model for Article Post
 class Article(models.Model):
@@ -38,6 +52,7 @@ class Article(models.Model):
         blank=True,
         options={'quality': 100},
     )
+    tags = models.ManyToManyField(Tag,blank=True)
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
 

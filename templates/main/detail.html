@@ -12,21 +12,27 @@
 
 <!-- 文章详情 -->
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <!-- 标题及作者 -->
-        <div class="col-9">
-            <h1 class="mt-4 mb-4">{{ article.title }}</h1>
-            <div class="alert alert-success">
-                <div>
-                    Author: {{ article.author }}
+        <div class="col-lg-9">
+            <div class="card rounded-0 border-0" id="article">
+                <div class="card-body px-2 px-md-3 pb-0">
+                    <h1 class="card-title text-center font-weight-bold text-info">{{ article.title }}</h1>
+                    <hr>
+                    <div class="text-center">
+                        <span class="mx-2" data-toggle="tooltip" data-placement="bottom"
+                              title="最后编辑于{{ article.updated|date:'Y年m月d日' }}">{{ article.created }}</span>
+                        <span class="mx-2">views {{ article.total_views }}</span>
+                    </div>
+                    <div class="article-body mt-4 f-17" style="line-height:1.8">
+                        {{ article.body|safe }}
+                    </div>
+                    <!-- <div class="tag-cloud my-4">
+                        {% for tag in article.tags.all %}
+                        <a class="tags f-16" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div> -->
                 </div>
-                <div>
-                    views: {{ article.total_views }}
-                </div>
-            </div>
-            <!-- 文章正文 -->
-            <div class="col-12">
-                <p>{{ article.body|safe }}</p>
             </div>
             
             <!-- 发表评论 -->
@@ -85,7 +91,7 @@
             </div>
         </div>
 
-        <div class="col-3 mt-4" id="sidebar" class="sidebar">
+        <div class="col-lg-3 mt-4 d-none d-lg-block" id="sidebar" class="sidebar">
             <div class="sidebar__inner">
                 <hr>
                 <div>

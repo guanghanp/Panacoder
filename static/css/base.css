@@ -44,6 +44,10 @@ a:hover {
     border-bottom: 2px solid #1D3557;
 }
 
+.jumbotron{
+    background:url(../img/background.jpg);
+}
+
 /* ----------- nav bar ----------------*/
 
 .blog-navbar {
@@ -127,4 +131,50 @@ a:hover {
 
 .contact-info:hover {
     transform: translateY(-5%);
+}
+
+.tag-cloud {
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    text-align: left;
+}
+.tags {
+    color:#fff;
+    padding: .08rem .4rem;
+    float: left;
+    text-align: center;
+    margin: .3rem;
+    transition: all .5s;
+}
+.tags:nth-child(9n+1) {
+    background:#78BBE6;
+}
+.tags:nth-child(9n+2){
+    background:#FF895D;
+}
+.tags:nth-child(9n+3) {
+    background:#A3DE83;
+}
+.tags:nth-child(9n+4) {
+    background:#00BBF0;
+}
+.tags:nth-child(9n+5) {
+    background:#FF2E63;
+}
+.tags:nth-child(9n+6) {
+    background:#0D7377;
+}
+.tags:nth-child(9n+7) {
+    background:#AC005D;
+}
+.tags:nth-child(9n+8) {
+    background:#0881A3;
+}
+.tags:nth-child(9n+9) {
+    background:#EDA045;
+}
+.tags:hover {
+    color:#fff;
+    background:#555;
 }

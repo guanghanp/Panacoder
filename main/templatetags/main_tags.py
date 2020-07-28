@@ -1,7 +1,7 @@
 
 from django import template
 from django.utils import timezone
-from ..models import Article, Category
+from ..models import Article, Category, Tag
 from django.db.models.aggregates import Count
 import math
 
@@ -47,6 +47,10 @@ def load_article_list(context):
 @register.simple_tag
 def get_category():
     return Category.objects.annotate(total=Count('article')).filter(total__gt=0)
+
+@register.simple_tag
+def get_tag_list():
+    return Tag.objects.annotate(total=Count('article')).filter(total__gt=0)
 
 
 

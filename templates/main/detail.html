@@ -21,7 +21,7 @@
                     <hr>
                     <div class="text-center">
                         <span class="mx-2" data-toggle="tooltip" data-placement="bottom"
-                              title="最后编辑于{{ article.updated|date:'Y年m月d日' }}">{{ article.created }}</span>
+                              title="updated: {{ article.updated }}">{{ article.created }}</span>
                         <span class="mx-2">views {{ article.total_views }}</span>
                     </div>
                     <div class="article-body mt-4 f-17" style="line-height:1.8">
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3 mt-4 d-none d-lg-block" id="sidebar" class="sidebar">
+        <div class="col-lg-3 mt-4 d-none d-lg-block sidebar" id="sidebar">
             <div class="sidebar__inner">
                 <hr>
                 <div>
@@ -103,17 +103,6 @@
     </div>
 </div>
 
-<style>
-    .sidebar{
-        will-change: min-height;
-    }
-
-    .sidebar__inner{
-        transform: translate(0, 0);
-        transform: translate3d(0, 0, 0);
-        will-change: position, transform;
-    }
-</style>
 
 {% block script %}
 

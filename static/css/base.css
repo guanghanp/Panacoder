@@ -48,6 +48,30 @@ a:hover {
     background:url(../img/background.jpg);
 }
 
+.h1, h1 {
+    font-size: 1.6rem;
+}
+
+.h2, h2 {
+    font-size: 1.5rem;
+}
+
+.h3, h3 {
+    font-size: 1.4rem;
+}
+
+.h4, h4 {
+    font-size: 1.3rem;
+}
+
+.h5, h5 {
+    font-size: 1.2rem;
+}
+
+.h6, h6 {
+    font-size: 1.1rem;
+}
+
 /* ----------- nav bar ----------------*/
 
 .blog-navbar {
@@ -177,4 +201,57 @@ a:hover {
 .tags:hover {
     color:#fff;
     background:#555;
+}
+
+/* ----------- article detail ----------------*/
+
+.article-body h2{
+    font-weight:600;
+    margin: 10px 0;
+    padding: 0 10px;
+    border-left: 5px solid #20c997;
+    background-color: #f7f7f7;
+    line-height: 2em;
+}
+
+
+.article-body h3 {
+    font-weight:600;
+}
+
+.article-body p {
+    margin-bottom:1em;
+}
+
+.article-body ul,
+.article-body ol {
+    padding-left:2em;
+}
+
+.sidebar{
+    will-change: min-height;
+}
+
+.sidebar__inner{
+    transform: translate(0, 0);
+    transform: translate3d(0, 0, 0);
+    will-change: position, transform;
+}
+
+.toc ul{
+    padding-left:2em;
+}
+
+.toc >ul > li {
+    list-style-type: upper-roman;
+    line-height: 1.8em;
+    color: #E63946;
+}
+
+.toc > ul > li > ul{
+    padding-left:1em;
+}
+
+.toc > ul > li > ul > li {
+    list-style-type: none;
 }

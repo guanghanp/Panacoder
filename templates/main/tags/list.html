@@ -1,9 +1,35 @@
 {% load main_tags %}
 
+
+{% url 'main:article_list' as base_index %}
+{% url 'main:article_list_view' as view_index %}
+
+{% if filterType == 'Category'%}
+
+{% url 'main:category' filterInstance.id as base_index %}
+{% url 'main:category_view' filterInstance.id as view_index %}
+
+{% elif filterType == 'Tag' %}
+
+{% url 'main:tag' filterInstance.id as base_index %}
+{% url 'main:tag_view' filterInstance.id as view_index %}
+
+{% endif %}
+
+
+{% if filterType %}
+
+<div class="card border-0 rounded-0 px-3 mb-2 search-card">
+    <div class="card-header bg-white px-0">
+        <h6 class="float-right mb-0 mt-2"><span class="mx-2">{{ paginator.count }}</span> Articles</h6>
+        <h2><strong>{{filterType}}：{{ filterInstance.name }}</strong></h2>
+    </div>
+    <p>Random shit</p>
+</div>
+{% endif %}
+
 <!-- Sort Options -->
-<div class="text-secondary font-weight-bold py-2 choice">
-    {% url 'main:article_list' as base_index %}
-    {% url 'main:article_list_view' as view_index %}
+<div class="text-secondary font-weight-bold py-2 ml-1 choice">
     <a class="pb-2 {% if request.path == base_index %}active{% endif %}" href="{{ base_index }}">
         <i class="fas fa-calendar-alt mr-1"></i>Sort by Time</a>
     <a class="pb-2 ml-4 {% if request.path == view_index %}active{% endif %}" href="{{ view_index }}">
@@ -41,7 +67,9 @@
                     <!-- 附加信息 -->
                     {% if article.category %}
                     <span style="color: #457b9d;">
-                        <i class="fas fa-book"></i> {{ article.category }} &nbsp;
+                        <a href="{{article.category.get_absolute_url}}">
+                            <i class="fas fa-book"></i> {{ article.category }} &nbsp;
+                        </a>
                     </span>
                     {% endif %}
                     <span style="color: gray;">

@@ -1,29 +1,36 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block title %} Log in {% endblock title %}
+{% block title %} Sign in {% endblock title %}
+
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <br>
-            <h5>Click <a href='{% url "user:register" %}'>register</a> to join us!</h5>
-            <br>
-            <form method="post" action=".">
-                {% csrf_token %}
-                <!-- username -->
-                <div class="form-group">
-                    <label for="username">username</label>
-                    <input type="text" class="form-control" id="username" name="username">
-                </div>
-                <!-- password -->
-                <div class="form-group">
-                    <label for="password">password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <!-- submit -->
-                <button type="submit" class="btn btn-primary">Log in</button>
-            </form>
+    <div class="row my-3">
+        <div class="card form-card">
+            <div class="card-header text-center bg-white">
+              <h3>Log in</h1>
+            </div>
+            <div class="card-body">
+                <form class="form-login" method="post" action=".">
+                    {% csrf_token %}
+                    <!-- username -->
+                    <div class="form-group">
+                        <label for="username">Username </label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                    </div>
+                    <!-- password -->
+                    <div class="form-group">
+                        <label for="password">Password </label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div>
+                    <p class="text-muted"><a href="{% url 'user:register'%}">Register to join us!</a></p>
+                    <!-- submit -->
+                    <button class="btn btn-primary btn-sm float-right rounded-0" type="submit">Log in</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
 {% endblock content %}

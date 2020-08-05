@@ -16,6 +16,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('main:category', args=[self.id])
+
 # Article tag
 class Tag(models.Model):
     name = models.CharField(max_length=20)
@@ -29,6 +32,10 @@ class Tag(models.Model):
     # return all the articles in this tag
     def get_article_list(self):
         return Article.objects.filter(tags=self)
+
+    def get_absolute_url(self):
+        return reverse('main:tag', args=[self.id])
+
 
 # Data Model for Article Post
 class Article(models.Model):

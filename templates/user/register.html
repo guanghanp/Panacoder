@@ -2,34 +2,41 @@
 {% block title %} Register {% endblock title %}
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <br>
-            <form method="post" action=".">
-                {% csrf_token %}
-                <!-- 账号 -->
-                <div class="form-group col-md-4">
-                    <label for="username">username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
-                </div>
-                <!-- 邮箱 -->
-                <div class="form-group col-md-4">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email">
-                </div>
-                <!-- 密码 -->
-                <div class="form-group col-md-4">
-                    <label for="password">passowrd</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <!-- 确认密码 -->
-                <div class="form-group col-md-4">
-                    <label for="password2">re-enter password</label>
-                    <input type="password" class="form-control" id="password2" name="password2" required>
-                </div>
-                <!-- 提交按钮 -->
-                <button type="submit" class="btn btn-primary">Register!</button>
-            </form>
+    <div class="row my-3">
+        <div class="card form-card">
+            <div class="card-header text-center bg-white">
+              <h3>Register</h1>
+            </div>
+            <div class="card-body">
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    <!-- username -->
+                    <div class="form-group">
+                        <label for="username">Username <span class="asterisk">*</span> </label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus>
+                    </div>
+                    <!-- email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+                    </div>
+                    <!-- password -->
+                    <div class="form-group">
+                        <label for="password">Passowrd <span class="asterisk">*</span> </label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <!-- re-enter -->
+                    <div class="form-group">
+                        <label for="password2">Re-enter password <span class="asterisk">*</span> </label>
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Re-enter Password" required>
+                    </div>
+                    <div>
+                        <p class="text-muted"><a href="{% url 'user:login'%}"> Already have an account? Log in</a> </p>
+                        <!-- submit -->
+                        <button class="btn btn-primary btn-sm float-right rounded-0" type="submit">Register!</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

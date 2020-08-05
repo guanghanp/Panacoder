@@ -19,12 +19,11 @@
                 <div class="card-body px-2 px-md-3 pb-0">
                     <h1 class="card-title text-center font-weight-bold text-info">{{ article.title }}</h1>
                     <hr>
-                    <div class="text-center">
-                        <span class="mx-2" data-toggle="tooltip" data-placement="bottom"
-                              title="updated: {{ article.updated }}">{{ article.created }}</span>
+                    <div class="text-center text-muted" style="font-size:14px">
+                        <span class="mx-2" title="updated: {{ article.updated }}">{{ article.created }}</span>
                         <span class="mx-2">views {{ article.total_views }}</span>
                     </div>
-                    <div class="article-body mt-4 f-17" style="line-height:1.8">
+                    <div class="article-body mt-4" style="line-height:1.8">
                         {{ article.body|safe }}
                     </div>
                     <!-- <div class="tag-cloud my-4">
@@ -35,6 +34,11 @@
                 </div>
             </div>
             
+            <!-- Comment block -->
+            <div class="card mt-2 rounded-0 border-0" id="comment-block">
+                hello
+            </div>
+
             <!-- 发表评论 -->
             <hr>
             {% if user.is_authenticated %}

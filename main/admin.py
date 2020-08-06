@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article,Category,Tag
+from .models import Article,Category,Tag,About
 # Register your models here.
 
 @admin.register(Article)
@@ -30,3 +30,6 @@ class TagAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id','name')
     list_display_links = ('name',)
+
+
+admin.site.register(About)

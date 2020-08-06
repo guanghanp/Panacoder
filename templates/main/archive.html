@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load main_tags %}
+
+<!-- title -->
+{% block title %}
+    Archive
+{% endblock title %}
+
+<!-- content -->
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 rounded-0 mb-3 px-3 archive">
+                <div class="card-header bg-white px-0">
+                    <h1 class="font-weight-bold">Archive</h1>
+                </div>
+                <div class="card-body">
+
+                    {% regroup articles by created.year as year %}
+                    <ul class="pl-4">
+                        {% for article in year %}
+                        <li>{{ article.grouper }}
+                            {% regroup article.list by created.month as month %}
+                            <ul class="pl-4">
+                                {% for article in month %}
+                                <li>{{ article.grouper|toMonth }}
+                                    <ul class="pl-4">
+                                        {% for each in article.list %}
+                                        <li class="text-info">{{ each.created|date:"m-d" }}&nbsp;&nbsp;<a href="{{ each.get_absolute_url }}">{{ each.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% include 'main/tags/sideBar.html' %}
+        </div>
+    </div>
+        
+</div>
+{% endblock content %}

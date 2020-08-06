@@ -13,10 +13,10 @@
             <a class="nav-link" href="{% url 'main:article_list' %}"><i class="fas fa-home"></i> Home</a>
           </li>
           <li class="nav-item mr-2">
-            <a class="nav-link" href="{% url 'main:article_list' %}"><i class="fas fa-archive"></i> Archive</a>
+            <a class="nav-link" href="{% url 'main:archive' %}"><i class="fas fa-archive"></i> Archive</a>
           </li>
           <li class="nav-item mr-2">
-            <a class="nav-link" href="{% url 'main:article_list' %}"><i class="fas fa-puzzle-piece"></i> About</a>
+            <a class="nav-link" href="{% url 'main:about' %}"><i class="fas fa-puzzle-piece"></i> About</a>
           </li>
           {% if user.is_authenticated %}
             <!-- 如果用户已经登录，则显示用户名下拉框 -->

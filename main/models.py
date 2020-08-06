@@ -72,3 +72,12 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('main:detail', args=[self.id])
 
+# Data Model for About
+class About(models.Model):
+    content = models.TextField()
+    created = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'About'
+

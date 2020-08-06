@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Article, Category, Tag
+from .models import Article, Category, Tag, About
 from django.views.generic import  DetailView, ListView
 import markdown
 from django.http import HttpResponse
@@ -68,6 +68,12 @@ class TagView(ListView):
         context_data['filterInstance'] = tag
         return context_data
 
+class ArchiveView(ListView):
+    model = Article
+    context_object_name = 'articles'
+    template_name = 'main/archive.html'
+    paginate_by = 100
+
 class ArticleView(DetailView):
     model = Article
     context_object_name = 'article'
@@ -93,3 +99,18 @@ class ArticleView(DetailView):
         context_data['toc'] = md.toc
         context_data['comments'] = comments
         return context_data
+
+def AboutView(request):
+    about = About.objects.first()
+    if about:
+        md = markdown.Markdown(
+            extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            ]
+        )
+        content = md.convert(about.content)
+    else:
+        content = "Not set up yet."
+    
+    return render(request, 'main/about.html', context={'content': content})

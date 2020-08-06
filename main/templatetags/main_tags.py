@@ -40,6 +40,11 @@ def time_since_en(value):
             return "1 year ago"
         return str(math.floor(diff.days / 365)) + " years ago"
 
+@register.filter(name='toMonth')
+def toMonth(value):
+    Months = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
+    return Months[value]
+
 @register.inclusion_tag('main/tags/list.html',takes_context=True)
 def load_article_list(context):
     return context

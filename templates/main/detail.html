@@ -95,9 +95,8 @@
 
         </div>
 
-        <div class="col-lg-3 mt-4 d-none d-lg-block sidebar" id="sidebar">
-            <div class="sidebar__inner">
-                <hr>
+        <div class="col-lg-3 mt-3 pl-0 d-none d-lg-block sidebar" id="sidebar">
+            <div class="sidebar__inner mt-5 py-2">
                 <div>
                     {{ toc|safe }}
                 </div>
@@ -114,8 +113,8 @@
 <script src="{% static 'sticky_sidebar/jquery.sticky-sidebar.min.js' %}"></script>
 <script type="text/javascript">
     $('#sidebar').stickySidebar({
-        topSpacing: 20,
-        bottomSpacing: 20,
+        topSpacing: 30,
+        bottomSpacing: 30,
     });
 </script>
 

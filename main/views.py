@@ -98,6 +98,7 @@ class ArticleView(DetailView):
         comments = Comment.objects.filter(article=article.id)
         context_data['toc'] = md.toc
         context_data['comments'] = comments
+        print(article.body)
         return context_data
 
 def AboutView(request):

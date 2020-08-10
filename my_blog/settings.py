@@ -37,10 +37,32 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'crispy_forms',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # 可添加需要的第三方登录
+    'allauth.socialaccount.providers.github',
+
     'main',
     'user',
     'comment',
 ]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+# use bootstrap4 for forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -70,16 +92,34 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+
+    'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 WSGI_APPLICATION = 'my_blog.wsgi.application'
 
+
+MYSQL_HOST = '127.0.0.1'
+MYSQL_NAME = 'panacoder'
+MYSQL_USER = 'panacoder'
+MYSQL_PASSWORD = 'python'
+MYSQL_PORT = 3306
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': MYSQL_NAME,  
+        'USER': MYSQL_USER,  
+        'PASSWORD': MYSQL_PASSWORD, 
+        'HOST': MYSQL_HOST,
+        'PORT': MYSQL_PORT,
+        'OPTIONS': {'charset': 'utf8'}
     }
 }
 

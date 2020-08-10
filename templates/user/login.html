@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block title %} Sign in {% endblock title %}
+{% block title %} Log in {% endblock title %}
 
 {% block content %}
 <div class="container">
@@ -12,14 +12,15 @@
             <div class="card-body">
                 <form class="form-login" method="post" action=".">
                     {% csrf_token %}
+
                     <!-- username -->
                     <div class="form-group">
-                        <label for="username">Username </label>
+                        <label for="username">Username</label>
                         <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
                     </div>
                     <!-- password -->
                     <div class="form-group">
-                        <label for="password">Password </label>
+                        <label for="password">Password</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                     </div>
                     <div>

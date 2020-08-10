@@ -3,3 +3,6 @@ markdown
 Pygments
 Pillow
 django-imagekit
+mysqlclient
+django-allauth
+django-crispy-forms

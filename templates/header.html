@@ -25,13 +25,13 @@
                   <i class="fas fa-user"></i>&nbsp;{{ user.username }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href='{% url "user:logout" %}'>Log out</a>
+                  <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
                 </div>
             </li>
           <!-- if not logged in, display log in button -->
           {% else %}
             <li class="nav-item mr-2">
-                <a class="nav-link" href="{% url 'user:login' %}"><i class="fas fa-user"></i> Log in</a>
+                <a class="nav-link" href="{% url 'account_login' %}?next={{ request.path }}"><i class="fas fa-user"></i> Log in</a>
             </li>                    
           {% endif %}
         </ul>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block title %} Log in {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-3">
+        <div class="card form-card">
+            <div class="card-header text-center bg-white">
+              <h3>Log in</h1>
+            </div>
+            <div class="card-body">
+                <form class="login" id="login_form" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <!-- <div class="form-group">
+                        <label for="id_login">Username</label>
+                        <input type="text" id="id_login" name="login" class="form-control" placeholder="Username" required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password">Password</label>
+                        <input type="password" id="id_password" name="password" class="form-control" placeholder="Password" required>
+                    </div> -->
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <p class="text-muted"><a href="{% url 'account_signup'%}?next={{ redirect_field_value }}">{% trans "Register to join us!" %}</a></p>
+                    <!-- submit -->
+                    <button class="btn btn-primary btn-sm float-right rounded-0" type="submit" id="submit_login">{% trans "Log In" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

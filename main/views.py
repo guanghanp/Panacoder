@@ -34,12 +34,12 @@ class CategoryView(ListView):
     
     def get_queryset(self, **kwargs):
         queryset = super(CategoryView, self).get_queryset()
-        cate = get_object_or_404(Category, id=self.kwargs.get('pk'))
+        cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
         return queryset.filter(category=cate)
         
     def get_context_data(self, **kwargs):
         context_data = super(CategoryView, self).get_context_data()
-        cate = get_object_or_404(Category, id=self.kwargs.get('pk'))
+        cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
         context_data['filterType'] = "Category"
         context_data['filterInstance'] = cate
         return context_data
@@ -58,12 +58,12 @@ class TagView(ListView):
     
     def get_queryset(self, **kwargs):
         queryset = super(TagView, self).get_queryset()
-        tag = get_object_or_404(Tag, id=self.kwargs.get('pk'))
+        tag = get_object_or_404(Tag, slug=self.kwargs.get('slug'))
         return queryset.filter(tags=tag)
         
     def get_context_data(self, **kwargs):
         context_data = super(TagView, self).get_context_data()
-        tag = get_object_or_404(Tag, id=self.kwargs.get('pk'))
+        tag = get_object_or_404(Tag, slug=self.kwargs.get('slug'))
         context_data['filterType'] = "Tag"
         context_data['filterInstance'] = tag
         return context_data
@@ -98,7 +98,6 @@ class ArticleView(DetailView):
         comments = Comment.objects.filter(article=article.id)
         context_data['toc'] = md.toc
         context_data['comments'] = comments
-        print(article.body)
         return context_data
 
 def AboutView(request):

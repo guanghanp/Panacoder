@@ -9,19 +9,24 @@ from imagekit.processors import ResizeToFit
 class Category(models.Model):
 
     # name for catagory
-    name = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=30,unique=True)
     # time of creation
     created = models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(blank=True,null=True)
+
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('main:category', args=[self.id])
+        return reverse('main:category', kwargs={'slug':self.slug})
 
 # Article tag
 class Tag(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20,unique=True)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(blank=True,null=True)
 
     class Meta:
         ordering = ['id']
@@ -34,7 +39,7 @@ class Tag(models.Model):
         return Article.objects.filter(tags=self)
 
     def get_absolute_url(self):
-        return reverse('main:tag', args=[self.id])
+        return reverse('main:tag', kwargs={'slug':self.slug})
 
 
 # Data Model for Article Post

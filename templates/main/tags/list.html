@@ -6,13 +6,13 @@
 
 {% if filterType == 'Category'%}
 
-{% url 'main:category' filterInstance.id as base_index %}
-{% url 'main:category_view' filterInstance.id as view_index %}
+{% url 'main:category' filterInstance.slug as base_index %}
+{% url 'main:category_view' filterInstance.slug as view_index %}
 
 {% elif filterType == 'Tag' %}
 
-{% url 'main:tag' filterInstance.id as base_index %}
-{% url 'main:tag_view' filterInstance.id as view_index %}
+{% url 'main:tag' filterInstance.slug as base_index %}
+{% url 'main:tag_view' filterInstance.slug as view_index %}
 
 {% endif %}
 
@@ -22,9 +22,9 @@
 <div class="card border-0 rounded-0 px-3 mb-2 search-card">
     <div class="card-header bg-white px-0">
         <h6 class="float-right mb-0 mt-2"><span class="mx-2">{{ paginator.count }}</span> Articles</h6>
-        <h2><strong>{{filterType}}：{{ filterInstance.name }}</strong></h2>
+        <h2><strong>{{filterType}} : {{ filterInstance.name }}</strong></h2>
     </div>
-    <p>Random shit</p>
+    <p class="mt-2">{{ filterInstance.description }}</p>
 </div>
 {% endif %}
 

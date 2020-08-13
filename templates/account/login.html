@@ -1,7 +1,9 @@
-{% extends "base.html" %}
-{% load staticfiles %}
+{% extends "account/base.html" %}
+
 {% load i18n %}
+{% load account socialaccount %}
 {% load crispy_forms_tags %}
+
 {% block title %} Log in {% endblock title %}
 
 {% block content %}
@@ -9,7 +11,7 @@
     <div class="row my-3">
         <div class="card form-card">
             <div class="card-header text-center bg-white">
-              <h3>Log in</h1>
+              <h3>Log in</h3>
             </div>
             <div class="card-body">
                 <form class="login" id="login_form" method="POST" action="{% url 'account_login' %}">
@@ -27,10 +29,19 @@
                     {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
+                    <p class="text-muted"><a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a></p>
                     <p class="text-muted"><a href="{% url 'account_signup'%}?next={{ redirect_field_value }}">{% trans "Register to join us!" %}</a></p>
                     <!-- submit -->
                     <button class="btn btn-primary btn-sm float-right rounded-0" type="submit" id="submit_login">{% trans "Log In" %}</button>
                 </form>
+            </div>
+            <div class="text-center mb-5" id="social-login">
+                <div class="login-title">
+                    <span>Log in with</span>
+                </div>
+                <div class="login-link">
+                    <a class="mx-4" href="/accounts/github/login/?next={{ redirect_field_value }}" title="Github"><i class="fa fa-github"></i></a>
+                </div>
             </div>
         </div>
     </div>

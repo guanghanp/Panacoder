@@ -304,6 +304,30 @@ a:hover {
     margin-bottom: 0;
 }
 
+#social-login .login-title {
+    position: relative;
+    display: block;
+    margin-bottom:10px;
+}
+#social-login span {
+    color:#999;
+}
+#social-login span:before,
+#social-login span:after {
+    position: absolute;
+    top: 50%;
+    background: #eee;
+    width: 32%;
+    height: 1px;
+    content: '';
+}
+#social-login span:before {
+    left:0;
+}
+#social-login span:after {
+    right:0;
+}
+
 /* ----------- archive ----------------*/
 
 .archive .card-header {

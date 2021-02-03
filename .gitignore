@@ -12,7 +12,5 @@ __pycache__/
 venv/
 ENV/
 
-migrations/
-!migrations/__init__.py
 media/
 

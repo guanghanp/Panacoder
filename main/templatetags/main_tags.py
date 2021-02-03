@@ -57,5 +57,7 @@ def get_category():
 def get_tag_list():
     return Tag.objects.annotate(total=Count('article')).filter(total__gt=0)
 
-
-
+@register.simple_tag
+def get_request_param(request, param, default=None):
+    '''获取请求的参数'''
+    return request.POST.get(param) or request.GET.get(param, default)

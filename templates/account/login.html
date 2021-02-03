@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load main_tags %}
 {% load crispy_forms_tags %}
 {% block title %} Log in {% endblock title %}
 
@@ -27,10 +28,19 @@
                     {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
-                    <p class="text-muted"><a href="{% url 'account_signup'%}?next={{ redirect_field_value }}">{% trans "Register to join us!" %}</a></p>
+                    <p class="text-muted"><a href="{% url 'account_signup'%}">{% trans "Register to join us!" %}</a></p>
                     <!-- submit -->
                     <button class="btn btn-primary btn-sm float-right rounded-0" type="submit" id="submit_login">{% trans "Log In" %}</button>
                 </form>
+            </div>
+            <div class="text-center mb-2" id="social-login">
+                <div class="login-title">
+                    <span>log in with</span>
+                </div>
+                <div class="login-link">
+                    {% get_request_param request 'next' as next_url %}
+                    <a class="mx-4" href="/accounts/github/login/?next={{ next_url }}" title="社交账号登录有点慢，请耐心等候！"><i class="fab fa-github fa-2x"></i></a>
+                </div>
             </div>
         </div>
     </div>

@@ -95,7 +95,7 @@ a:hover {
 }
 
 .search-card .card-header strong {
-    padding-bottom:10px;
+    padding-bottom:12px;
     border-bottom: 2px solid #00AAEE;
 }
 
@@ -148,7 +148,7 @@ a:hover {
     margin-left:0.4rem;
 }
 
-.category-item:before {
+/* .category-item:before {
     position: absolute;
     top: 1em;
     left: .2rem;
@@ -160,7 +160,7 @@ a:hover {
     transform-origin: 25% center;
     border-width: 4px;
     content: "";
-}
+} */
 
 .contact-info {
     transition:0.5s;
@@ -302,6 +302,39 @@ a:hover {
 .card-body .alert ul {
     padding-left:.5rem;
     margin-bottom: 0;
+}
+
+#social-login .login-title {
+    position: relative;
+    display: block;
+    margin-bottom:10px;
+}
+#social-login span {
+    color:#999;
+}
+#social-login span:before,
+#social-login span:after {
+    position: absolute;
+    top: 50%;
+    background: #eee;
+    width: 38%;
+    height: 1px;
+    content: '';
+}
+#social-login span:before {
+    left:0;
+}
+#social-login span:after {
+    right:0;
+}
+
+.fa-github {
+    color: #333;
+    opacity: .8;
+}
+.fa-weibo:hover,
+.fa-github:hover {
+    opacity: 1;
 }
 
 /* ----------- archive ----------------*/

@@ -5,6 +5,13 @@
 </div>
 <footer class="py-3 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; gpan 2020</p>
+        {% now "Y" as current_year %}
+        <p class="mb-0 text-center text-white"><small>Copyright &copy; {{current_year}} Guanghan Pan. Powered by Django.</small></p>
+        <p class="m-0 text-center text-white"><small id="web-day"></small></p>
+        <script>function getTime(){var d = new Date();var old = new Date('2021/02/03');
+            var y=document.getElementById("web-day");
+            var dd=Math.floor((d.getTime() - old.getTime()) / (24 * 3600 * 1000));
+            var d_str="The website has been up for "+dd+" days.";y.innerHTML=d_str;}getTime()</script>
+        
     </div>
 </footer>

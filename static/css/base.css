@@ -46,6 +46,24 @@ a:hover {
 
 .jumbotron{
     background:url(../img/background.jpg);
+    background-position: top center;
+    background-attachment: fixed;
+    height: 300px;
+    position: relative;
+}
+
+.opening-container{
+    width: auto;
+    bottom: 2rem;
+    position: absolute;
+    /* bottom: 2rem;
+    left: 2rem;
+    position: absolute; */
+}
+
+.opening-content{
+    font-size: 2.2rem;
+    color: #ffffff;
 }
 
 .h1, h1 {
@@ -134,7 +152,7 @@ a:hover {
 
 .sideblock-card .badge {
     width: 1.5rem;
-    background-color: gray;
+    background-color: rgb(163, 163, 163);
     color: #fff;
     font-weight: 700;
     border-radius: 1rem;
@@ -170,6 +188,11 @@ a:hover {
     transform: translateY(-5%);
 }
 
+.contact-link:hover {
+    cursor: pointer;
+    color: black;
+}
+
 .tag-cloud {
     width: 100%;
     margin: auto;
@@ -181,7 +204,7 @@ a:hover {
     padding: .08rem .4rem;
     float: left;
     text-align: center;
-    margin: .3rem;
+    margin: .2rem;
     transition: all .4s;
     border-radius: 8px;
 }
@@ -219,6 +242,36 @@ a:hover {
 }
 
 /* ----------- article detail ----------------*/
+
+
+.breadcrumb-item+.breadcrumb-item::before {
+    content: ">";
+}
+
+.tag-field{
+    display:flex;
+    width: auto;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.article-tags {
+    background-color:rgb(192, 192, 192);
+    color:#fff;
+    text-align: center;
+    display: inline-flex;
+    transition: all .3s;
+    border-radius: 0.4rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 0.7rem;
+}
+
+.article-tags:hover {
+    color:#fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px 0.2px rgba(0, 0, 0, 0.37);
+}
 
 .article-body h2{
     font-weight:600;
@@ -279,6 +332,10 @@ a:hover {
 
 .comment-form {
     background-color:#f7f7f7;
+}
+
+.comment-user {
+    font-size:1.3rem;
 }
 
 /* ----------- log in/out ----------------*/

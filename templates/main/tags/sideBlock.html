@@ -35,26 +35,26 @@
 </div>
 
 <!--Contact me-->
-<div class="card border-0 rounded-0 px-3 mb-2 mb-md-3 d-none d-lg-block sideblock-card">
+<div class="card border-0 rounded-0 px-3 mb-2 mb-md-3 sideblock-card">
     <div class="card-header bg-white px-0">
         <strong><i class="fa fa-address-card mr-2"></i>Contact Me</strong>
     </div>
     <div class="card-body px-0 pt-3 pb-1">
         <div class="row text-center">
             <div class="col contact-info">
-                <a href="{{ my_github }}" target="_blank" title="Check out my Github page">
+                <a class="contact-link" href="{{ my_github }}" target="_blank" title="My Github">
                     <img style="max-width:50px" alt="My Github" src="https://img.icons8.com/fluent/144/000000/github.png">
                     <p class="mt-1">Github</p>
                 </a>
             </div>
             <div class="col contact-info">
-                <a href="{% url 'main:article_list'%}" target="_blank" title="Follow me on Instagram">
-                    <img style="max-width:50px" alt="My Instagram" src="https://img.icons8.com/fluent/144/000000/instagram-new.png">
-                    <p class="mt-1">Instagram</p>
+                <a class="contact-link" href="{{ my_linkedin }}" target="_blank" title="My Linkedin">
+                    <img style="max-width:50px" alt="My Linkedin" src="https://img.icons8.com/fluent/144/000000/linkedin.png">
+                    <p class="mt-1">Linkedin</p>
                 </a>
             </div>
             <div class="col contact-info">
-                <a href="{% url 'main:article_list'%}" target="_blank" title="Chat with me on Wechat">
+                <a class="contact-link" style="cursor: pointer;" rel="popover" data-img="{% static 'img/wechat.jpg' %}" title="My Wechat">
                     <img style="max-width:50px" alt="My Wechat" src="https://img.icons8.com/color/144/000000/weixing.png">
                     <p class="mt-1">Wechat</p>
                 </a>

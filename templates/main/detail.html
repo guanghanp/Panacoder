@@ -15,6 +15,18 @@
     <div class="row justify-content-center">
         <!-- 标题及作者 -->
         <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-white border-0 rounded-0 mb-2 py-2 f-15">
+                    <li class="breadcrumb-item">
+                        <i class="fa fa-home mr-1"></i><a href="{% url 'main:article_list' %}">Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ article.category.get_absolute_url }}">{{ article.category}}</a>
+                    </li>
+                    <li class="breadcrumb-item active d-none d-md-block" aria-current="page">{{ article.title }}</li>
+                    <li class="breadcrumb-item active d-md-none" aria-current="page">Current Article</li>
+                </ol>
+            </nav>
             <div class="card rounded-0 border-0" id="article">
                 <div class="card-body px-2 px-md-3 pb-0">
                     <h1 class="card-title text-center font-weight-bold text-info">{{ article.title }}</h1>
@@ -23,14 +35,14 @@
                         <span class="mx-2" title="updated: {{ article.updated }}">{{ article.created }}</span>
                         <span class="mx-2">views {{ article.total_views }}</span>
                     </div>
+                    <div class="tag-field py-2">
+                        {% for tag in article.tags.all %}
+                        <a class="article-tags px-1 ml-1" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
                     <div class="article-body mt-4" style="line-height:1.8">
                         {{ article.body|safe }}
                     </div>
-                    <!-- <div class="tag-cloud my-4">
-                        {% for tag in article.tags.all %}
-                        <a class="tags f-16" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
-                        {% endfor %}
-                    </div> -->
                 </div>
             </div>
             
@@ -57,7 +69,7 @@
                                         name="body" 
                                         rows="2"></textarea>
                                 </div>
-                                <!-- 提交按钮 -->
+                                <!-- submit button -->
                                 <button type="submit" class="btn btn-info btn-sm float-right rounded-0">submit</button>                    
                             </form>
                         </div>
@@ -72,18 +84,18 @@
                     
                 </div>
                 <div class="mt-3 comment-list">
-                    <h5>There are total {{ comments.count }} comments</h5>
+                    <h5>There are {{ comments.count }} comments in total</h5>
                     <div>
                         {% for comment in comments %}
                             <hr>
-                            <p>
-                                <strong style="color: pink">
-                                    {{ comment.user }}
-                                </strong> 于 
-                                <span style="color: green">
+                            <div class="mb-2">
+                                <strong class="comment-user text-info">
+                                    {{ comment.user }}&nbsp;
+                                </strong>
+                                <small class="text-muted">
                                     {{ comment.created|date:"Y-m-d H:i:s" }}
-                                </span> 时说：
-                            </p>
+                                </small>
+                            </div>
                             <p>
                                 {{ comment.body }}
                             </p>
@@ -95,13 +107,13 @@
 
         </div>
 
-        <div class="col-lg-3 mt-3 pl-0 d-none d-lg-block sidebar" id="sidebar">
+        <!-- <div class="col-lg-3 mt-3 pl-0 d-none d-lg-block sidebar" id="sidebar">
             <div class="sidebar__inner mt-5 py-2">
                 <div>
                     {{ toc|safe }}
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </div>

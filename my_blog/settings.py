@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'dyjhn%wjf0xxnxbfa$yxm6bg#alzh#2lu#z3q7q6*mcstggm!n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -88,6 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'main.context_processors.settings_info'
             ],
         },
     },
@@ -223,6 +224,12 @@ LOGGING = {
         },
     }
 }
+
+# link to github
+MY_GITHUB = os.getenv('MY_GITHUB', 'https://github.com/guanghanp')
+
+# link to linkediin
+MY_LINKEDIN = os.getenv('MY_LINKEDIN', 'https://www.linkedin.com/in/guanghan-pan-7349a9192/')
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

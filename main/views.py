@@ -12,7 +12,7 @@ class IndexView(ListView):
     model = Article
     context_object_name = 'articles'
     template_name = 'main/main.html'
-    paginate_by = 2
+    paginate_by = 10
 
     def get_ordering(self):
         sort = self.kwargs.get('sort')
@@ -24,7 +24,7 @@ class CategoryView(ListView):
     model = Article
     context_object_name = 'articles'
     template_name = 'main/main.html'
-    paginate_by = 2
+    paginate_by = 10
 
     def get_ordering(self):
         sort = self.kwargs.get('sort')
@@ -48,7 +48,7 @@ class TagView(ListView):
     model = Article
     context_object_name = 'articles'
     template_name = 'main/main.html'
-    paginate_by = 2
+    paginate_by = 10
 
     def get_ordering(self):
         sort = self.kwargs.get('sort')

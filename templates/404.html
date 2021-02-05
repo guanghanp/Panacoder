@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %} 404 {% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row errorpage">
+        <div class="col align-self-center error-img text-center">
+            <div class="errorimg">
+                <img class="img-fluid" src="{% static 'img/404.png'%}">
+            </div>
+            <div class="errormsg">
+                <h1>404 - PAGE NOT FOUND</h1>
+                <button type="submit" class="btn btn-info btn rounded-0 mt-2">GO TO HOMEPAGE</button> 
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

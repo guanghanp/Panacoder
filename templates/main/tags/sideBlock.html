@@ -28,7 +28,7 @@
             {% get_tag_list as tag_list %}
             {% for tag in tag_list %}
             <a href="{{ tag.get_absolute_url }}" class="tags" id="tag-{{ tag.id }}"
-               title="【{{ tag }}】标签下有{{ tag.total }}篇文章">{{ tag }}</a>
+               title="There are {{ tag.total }} articles under tag【{{ tag }}】">{{ tag }}</a>
             {% endfor %}
         </div>
     </div>

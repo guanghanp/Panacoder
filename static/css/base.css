@@ -133,11 +133,11 @@ a:hover {
 }
 
 .sideblock-card .badge {
-    width: 2.2rem;
-    background-color: #17a2b8;
+    width: 1.5rem;
+    background-color: gray;
     color: #fff;
     font-weight: 700;
-    border-radius: .2rem;
+    border-radius: 1rem;
 }
 
 .category-item {

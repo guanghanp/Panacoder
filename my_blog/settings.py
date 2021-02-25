@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     'main',
     'user',
     'comment',
+    'cloudinary',
 ]
 
 SITE_ID = 1
@@ -230,6 +233,8 @@ MY_GITHUB = os.getenv('MY_GITHUB', 'https://github.com/guanghanp')
 
 # link to linkediin
 MY_LINKEDIN = os.getenv('MY_LINKEDIN', 'https://www.linkedin.com/in/guanghan-pan-7349a9192/')
+
+CLOUDINARY_URL =  os.getenv('CLOUDINARY_URL')
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

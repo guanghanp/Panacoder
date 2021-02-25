@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from cloudinary.models import CloudinaryField 
+from django.db.models.signals import pre_delete
+import cloudinary
 from django.urls import reverse
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
@@ -56,13 +59,18 @@ class Article(models.Model):
         on_delete=models.PROTECT,
         related_name='article'
     )
-    image = ProcessedImageField(
-        upload_to='article/%Y%m%d',
-        processors=[ResizeToFit(width=400)],
-        format='JPEG',
+    # image = ProcessedImageField(
+    #     upload_to='article/%Y%m%d',
+    #     processors=[ResizeToFit(width=400)],
+    #     format='JPEG',
+    #     null=True,
+    #     blank=True,
+    #     options={'quality': 100},
+    # )
+    image = CloudinaryField(
+        'image',
         null=True,
         blank=True,
-        options={'quality': 100},
     )
     tags = models.ManyToManyField(Tag,blank=True)
     created = models.DateTimeField(default=timezone.now)

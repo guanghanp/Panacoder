@@ -309,6 +309,10 @@ a:hover {
     padding-left:2em;
 }
 
+.article-body .codehilite{
+    padding-left:0.5rem;
+}
+
 .sidebar{
     will-change: min-height;
     width:100%;
